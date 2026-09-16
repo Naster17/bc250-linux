@@ -1,9 +1,10 @@
 # bc250-linux
 
-BC-250 (`1002:13fe`, `gfx1013`) kernel patch set for Alpine `linux-lts`
-6.18.50, branch `bc250-r1`. Tracked as patches (not a full kernel tree) so
-anyone can apply them onto the Alpine source and build the versioned r1
-kernel. Stock Alpine stays default; r1 is one-shot only.
+BC-250 (`1002:13fe`, `gfx1013`) kernel patch set. Branch `bc250-r1` =
+Alpine `linux-lts` 6.18.50 series; branch `bc250-r2` = Alpine
+`linux-stable` 7.1.5 series (current default, see `docs/R2-NOTES.md`).
+Tracked as patches (not a full kernel tree) so anyone can apply them onto
+the matching source and build the versioned kernel.
 
 ## Patches (apply in order)
 
