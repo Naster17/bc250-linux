@@ -22,8 +22,9 @@ kernel. Stock Alpine stays default; r1 is one-shot only.
 Validated boot params: `3/0/3`, `gpu_recovery=0`, `sched_policy=0`
 (never `2`), SDMA firmware = navi12 ucode inside r1 initramfs only.
 
-## 8-CPU question
+## 8-core CPU unlock
 
-No CPU topology change exists. The APU exposes 12 x86 threads (6C/12T
-Zen); config allows 256. "40CU" is the GPU unlock; there is no 8-CPU
-patch and none is needed.
+Separate mechanism, documented in `docs/8CORE-UNLOCK.md`: SMU mask
+`0x0115A870` (`0x77` stock, `0xFF` unlocked) via `bc250-8core-unlock.sh`,
+warm reboot to enumerate, plus ACPI update. `0005` here is only the
+telemetry companion patch; the unlock itself is a runtime SMU operation.
