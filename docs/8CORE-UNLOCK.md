@@ -29,13 +29,17 @@ metrics table, `cs_eight_core_map` override, live GFXCLK query). It does
 mask is set. Kept in sync here as `kernel-patches/0005-*.patch`
 (reference copy; authoritative source is the GabriWar repo).
 
-## Status on our board (2026-09-16)
+## Status on our board (2026-09-17, updated)
 
-- Mask reads `0xFF` (UNLOCKED) but the running kernel still sees 6 cores /
-  12 threads: firmware has not re-enumerated yet (warm reboot pending).
-- r1 kernel + ROCm stack validation (torch, llama, GEMM gates) was all
-  done in this 6-core-visible state. Do the 8-core warm reboot + re-gate
-  before claiming 8-core validation.
+- Mask reads `0xFF` (UNLOCKED); after warm reboots the kernel enumerates
+  all 8 cores / 16 threads, all online.
+- Per-core `stress-ng --verify` sweep (20 s pinned per physical core):
+  0 failures on every core including unlocked 3 and 7, spread within 1%,
+  0 machine-check events. Unlocked silicon is good.
+- r1.4 GPU re-gate in 8-core state: torch 2.9.1a0 `cuda` True
+  `['gfx1013']`, gloo allreduce OK (`R14_GATES_OK`) on both venvs.
+- Earlier r1/r2 validation was done 6-core-visible; the numbers above
+  close the 8-core validation gap.
 
 Refs: `elektricM/amd-bc250-docs` → System → 8 Core CPU Unlock;
 `Forbidden-Darkness/AMD-BC-250-UEFI-v2.2-Firmware-Menu-Script`;
