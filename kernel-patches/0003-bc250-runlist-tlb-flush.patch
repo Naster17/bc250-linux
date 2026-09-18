@@ -32,7 +32,7 @@
 +#define BC250_PCI_DEVICE_ID 0x13FE
 +
 +static int bc250_flush_by_runlist;
-+module_param(bc250_flush_by_runlist, int, 0644);
++module_param(bc250_flush_by_runlist, int, 0444);
 +MODULE_PARM_DESC(bc250_flush_by_runlist,
 +	"BC-250: bitmask, rebuild runlist to invalidate TLB: 1=on unmap, 2=on map (default 0)"); /* bc250 map-side flush (generic) */
 +
